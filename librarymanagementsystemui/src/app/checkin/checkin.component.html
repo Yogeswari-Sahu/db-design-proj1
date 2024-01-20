@@ -1,0 +1,59 @@
+<div class="container">
+    <div class="row ms-1 mt-3">
+        <h4>Check your Book in</h4>
+    </div>
+    <div class="row">
+        <div class="container mt-4">
+            <!-- Success Alert -->
+            <div *ngIf="showSuccessAlert" class="alert alert-success" role="alert">
+              Book Checked In Sucessfully!
+            </div>
+          
+            <!-- Danger Alert -->
+            <div *ngIf="showDangerAlert" class="alert alert-danger" role="alert">
+              No books checked in under the Borrower Id/ Borrower Name /Book ISBN given 
+            </div>
+          </div>
+          
+    </div>
+    <div class="row">
+        <div class="col-md-4 m-1 ms-2 mt-3">
+            <input type="text" [(ngModel)]="searchQuery" class="form-control" placeholder="Search...">
+
+        </div>
+        <div class="col-md-4 m-1 mt-3">
+            <button type="button" class="btn btn-outline-primary" (click)="onSearchInput()">Search</button>
+        </div>
+   
+    </div>
+</div>
+
+
+<table class="table table-hover" *ngIf="searchResults.length > 0" >
+    <thead class="thead-dark" >
+        <tr>
+            <!-- <th>S.no</th> -->
+            <th>ISBN</th>
+            <th>Card Id</th>
+            <th>Date Out</th>                
+            <th>Due Date</th>
+            <th>Book Title</th>                
+            <th>Borrower Name</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let result of searchResults;let i = index">
+            <!-- <td>{{ i + 1 }}</td> -->
+            <td>{{ result.isbn }}</td>
+            <td>{{ result.cardId }}</td>
+            <td>{{ result.dateOut }}</td>
+            <td>{{ result.dueDate }}</td>
+            <td>{{ result.bookTitle }}</td>
+            <td>{{ result.borrowerName }}</td>
+            <td>
+                <button (click)="checkInBook(result)" class="btn btn-outline-dark">Check In</button>
+            </td>           
+        </tr>
+    </tbody>        
+</table>

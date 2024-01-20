@@ -1,0 +1,79 @@
+<div class="container">
+    <div class="row ms-1 mt-3">
+        <h4>Check your Books Out</h4>
+    </div>
+    <div class="row">
+        <div class="container mt-4">
+            <!-- Success Alert -->
+            <div *ngIf="showSuccessAlert" class="alert alert-success" role="alert">
+              Checked Out Books Sucessfully!
+            </div>
+          
+            <!-- Danger Alert -->
+            <div *ngIf="showDangerAlert" class="alert alert-danger" role="alert">
+              Cannot checkout more than 3 books!
+            </div>
+
+            <!-- Author Doesn't exist Alert -->
+            <div *ngIf="showAuthorDoesntExistAlert" class="alert alert-danger" role="alert">
+                The borrower with the Card ID doesn't exist!
+            </div>
+          </div>
+          
+    </div>
+   
+</div>
+
+<div class="row">
+    <div class="col-md-2 m-1 ms-2 mt-3">
+        <h5>Card ID: </h5>
+
+    </div>
+    <div class="col-md-4 m-1 ms-2 mt-3">
+        <input type="text" [(ngModel)]="cardId" #cardIdInput="ngModel" class="form-control" placeholder="Insert your Card ID here">
+
+    </div>
+
+</div>
+
+
+<div class="container">
+
+
+    <table class="table table-hover" *ngIf="searchResults.length > 0" >
+        <thead class="thead-dark" >
+            <tr>
+                <th>S.no</th>
+                <th>ISBN</th>
+                <th>Title</th>
+                <th>Authors</th>                
+                <th>Delete?</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let book of searchResults;let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ book.isbn }}</td>
+                <td>{{ book.title }}</td>
+                <td>{{ book.authors.join(', ') }}</td>
+                
+                <td>
+                    <button class="btn btn-danger" (click)="deleteRow(book)">
+                        <i class="bi bi-trash"></i> Delete
+                      </button>
+                </td>
+            </tr>
+        </tbody>        
+    </table>
+    
+    <div class="row">
+        
+            
+        <div class="col-md-4 m-1 mt-3" style="text-align: center;"> 
+            <button type="button"  [disabled]="cardId.trim()===''" class="btn btn-outline-dark" (click)="checkout()" >Check Out</button>
+    
+        </div>
+    </div>
+</div>
+
+

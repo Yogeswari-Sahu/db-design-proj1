@@ -1,0 +1,63 @@
+<!-- borrower-form.component.html -->
+<div class="container">
+  <div class="row">
+    <div class="container mt-4">
+      <!-- Success Alert -->
+      <div *ngIf="showSuccessAlert" class="alert alert-success" role="alert">
+        Added Borrower with Card ID <b>'{{createdBorrowerID}}'</b> Sucessfully!
+      </div>
+      <!-- Danger Alert -->
+      <div *ngIf="showDangerAlert" class="alert alert-danger" role="alert">
+        Cannot add borrower with same SSN!
+      </div>
+      <!-- Required Field Alert -->
+      <div *ngIf="requiredFieldAlert" class="alert alert-danger" role="alert">
+        Please fill all the fields inorder to add a Borrower!
+      </div>
+    </div>
+  </div>
+
+</div>
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+          <h3>Add Borrower</h3>
+        </div>
+        <div class="card-body">
+          <form #myForm="ngForm" (ngSubmit)="addBorrower(myForm)">
+            <!-- SSN Field -->
+            <div class="mb-3">
+              <label for="ssn" class="form-label">SSN</label>
+              <input type="text" class="form-control" id="ssn" [(ngModel)]="borrower.ssn" name="ssn" required>
+            </div>
+
+            <!-- Borrower Name Field -->
+            <div class="mb-3">
+              <label for="bName" class="form-label">Borrower Name</label>
+              <input type="text" class="form-control" id="bName" [(ngModel)]="borrower.bname" name="bname" required>
+            </div>
+
+            <!-- Address Field -->
+            <div class="mb-3">
+              <label for="address" class="form-label">Address</label>
+              <input type="text" class="form-control" id="address" [(ngModel)]="borrower.address" name="address"
+                required>
+            </div>
+
+            <!-- Phone Field -->
+            <div class="mb-3">
+              <label for="phone" class="form-label">Phone</label>
+              <input type="text" class="form-control" id="phone" [(ngModel)]="borrower.phone" name="phone" required>
+            </div>
+            <!-- [disabled]="(borrower.cardId==='') || (borrower.bname==='') || (borrower.address==='') || (borrower.ssn==='') || (borrower.phone==='')" -->
+            <!-- Submit Button -->
+            <button type="submit"  class="btn btn-outline-primary" >Add Borrower</button>
+            <!-- (click)="addBorrower()" -->
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

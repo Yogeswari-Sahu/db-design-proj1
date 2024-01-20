@@ -1,0 +1,15 @@
+
+<app-header (childEvent)="handleChildEvent($event)"></app-header>
+<div class="container">
+  <div class="tab-content">
+    <app-home [selectedTab]="selectedTab" (childEvent)="handleChildEvent($event)" *ngIf="selectedTab === 'home'"></app-home>
+    <app-search [selectedTab]="selectedTab" [finalIsbnList]="isbnListToCheckOut" (childEvent)="handleChildEvent($event)" (dataEvent)="handleData($event)" *ngIf="selectedTab === 'search'"></app-search>
+    <app-search-by-isbn [selectedTab]="selectedTab" [finalIsbnList]="isbnListToCheckOut" (childEvent)="handleChildEvent($event)" (dataEvent)="handleData($event)" *ngIf="selectedTab === 'searchByIsbn'"></app-search-by-isbn>     
+    <app-checkin [selectedTab]="selectedTab" *ngIf="selectedTab === 'checkin'"></app-checkin>
+    <app-checkout [selectedTab]="selectedTab" [finalIsbnList]="isbnListToCheckOut" *ngIf="selectedTab==='checkout'" ></app-checkout>
+    <app-add-borrower [selectedTab]="selectedTab" *ngIf="selectedTab === 'borrower'"></app-add-borrower>
+    <app-refresh-fine [selectedTab]="selectedTab" *ngIf="selectedTab==='refreshFine'"></app-refresh-fine>
+    <app-pay-fine [selectedTab]="selectedTab" *ngIf="selectedTab === 'payFine'"></app-pay-fine>
+
+  </div>
+</div>

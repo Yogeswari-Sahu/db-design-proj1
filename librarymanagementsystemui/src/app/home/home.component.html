@@ -1,0 +1,79 @@
+<div class="container">
+    <div class="container m-4 mb-3">
+        <div style="text-align: center;">
+            <h1> Welcome to the Library Portal!</h1>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="container-fluid">
+            <div class="row">
+
+                <div class="col-md-6 col-lg-4 mt-3 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Search Book</h5>
+                            <p class="card-text">Search books using any string or ISBN <i class="fas fa-arrow-right"></i></p>
+                            <a (click)="selectTab('search')" class="btn btn-outline-primary m-1">Using Substring</a>
+                            <a (click)="selectTab('searchByIsbn')" class="btn btn-outline-primary m-1">Using ISBN</a>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-md-6 col-lg-4 mt-3 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Check In</h5>
+                            <p class="card-text">Check your Book in here <i class="fas fa-arrow-right"></i></p>
+                            <a (click)="selectTab('checkin')" class="btn btn-outline-primary m-1">Go to Page</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4 mt-3 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Check Out</h5>
+                            <p class="card-text">Checkout the books selected <i class="fas fa-arrow-right"></i></p>
+                            <a (click)="selectTab('checkout')" class="btn btn-outline-primary m-1">Go to Page</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4 mt-3 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Add Borrower</h5>
+                            <p class="card-text">Add a new Borrower here <i class="fas fa-arrow-right"></i></p>
+                            <a (click)="selectTab('borrower')" class="btn btn-outline-primary m-1">Go to Page</a>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-md-6 col-lg-4 mt-3 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Refresh Fines</h5>
+                            <p class="card-text">Refresh the fines every day <i class="fas fa-arrow-right"></i></p>
+                            <a (click)="selectTab('refreshFine')" class="btn btn-outline-primary m-1">Go to Page</a>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-md-6 col-lg-4 mt-3 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Pay Fine</h5>
+                            <p class="card-text">Pay off the dues <i class="fas fa-arrow-right"></i></p>
+                            <a (click)="selectTab('payFine')" class="btn btn-outline-primary m-1">Go to Page</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

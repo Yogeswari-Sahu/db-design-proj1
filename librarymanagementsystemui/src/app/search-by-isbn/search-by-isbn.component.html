@@ -1,0 +1,81 @@
+<div class="container">
+    <div class="row ms-1 mt-3">
+        <h4>Search Book by ISBN</h4>
+    </div>
+    <div class="row">
+        <div class="container mt-4">
+            <!-- Success Alert -->
+            <div *ngIf="showSuccessAlert" class="alert alert-success" role="alert">
+              Added the book(s) to the cart Sucessfully!
+            </div>
+          
+            <!-- Danger Alert -->
+            <div *ngIf="showDangerAlert" class="alert alert-danger" role="alert">
+              Cannot checkout more than 3 books!
+            </div>
+
+            <!-- Danger Alert2 -->
+            <div *ngIf="showDangerAlert2" class="alert alert-danger" role="alert">
+                Books already in Cart!
+                <!-- Already Books in Cart, Cannot checkout more than 3 books! -->
+              </div>
+
+              <!-- No Results found Alert -->
+            <div *ngIf="showNoResultsAlert" class="alert alert-danger" role="alert">
+                No results with the substring found!
+            </div>
+
+            <div *ngIf="showSearchingAlert" class="alert alert-primary" role="alert">
+                Searching!
+            </div>
+          </div>
+          
+    </div>
+    <div class="row">
+        <div class="col-md-4 m-1 ms-2 mt-3">
+            <input type="text" [(ngModel)]="searchQuery" class="form-control" placeholder="Search...">
+
+        </div>
+        <div class="col-md-2 m-1 mt-3">
+            <button type="button" class="btn btn-outline-primary" (click)="onSearchInput()">Search</button>
+        </div>
+        <div class="col-md-2 m-1 mt-3">
+            <!--  -->
+            <button type="button" [disabled]="(searchQuery=== '' || !(this.isbnList.length > 0))" class="btn btn-outline-dark" (click)="addToCheckOutButton()">Add to Check Out</button>
+
+        </div>
+        <div class="col-md-2 m-1 mt-3">
+            <button type="button" class="btn btn-outline-dark" (click)="selectTab('checkout')" >Go to Check Out</button>
+
+        </div>
+    </div>
+</div>
+
+<div class="container">
+
+    <table class="table table-hover">
+        <thead class="thead-dark" *ngIf="searchResults.length > 0">
+            <tr>
+                <th>S.no</th>
+                <th>ISBN</th>
+                <th>Title</th>
+                <th>Authors</th>
+                <th>Available</th>
+                <th>Checkout?</th>
+            </tr>
+        </thead>
+        <tbody *ngIf="searchResults.length > 0">
+            <tr *ngFor="let book of searchResults;let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ book.isbn }}</td>
+                <td>{{ book.title }}</td>
+                <td>{{ book.authors.join(', ') }}</td>
+                <td>{{ book.available ? 'Yes' : 'No' }}</td>
+                <td>
+                    <input type="checkbox" [disabled]="!book.available&&finalIsbnListContains(book.isbn)" (change)="handleCheckboxClick(book)" />
+
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

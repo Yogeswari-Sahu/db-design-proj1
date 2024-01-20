@@ -1,0 +1,22 @@
+
+<div class="container">
+    <div class="row">
+        <div class="container mt-4">
+            <!-- Success Alert -->
+            <div *ngIf="showSuccessAlert" class="alert alert-success" role="alert">
+              Refreshed Fines Sucessfully!
+            </div>
+          
+          </div>
+          
+    </div>
+    <div class="container m-4 mb-3">
+        <div style="text-align: center;">
+            <h1> Click to refresh fines</h1>
+            <button type="button" (click)="refreshFines()" class="btn btn-outline-primary btn-lg mt-4 mb-4">
+                Refresh Fines
+            </button>
+        </div>
+    </div>
+   
+</div>

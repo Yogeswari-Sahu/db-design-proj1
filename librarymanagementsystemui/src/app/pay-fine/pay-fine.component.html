@@ -1,0 +1,144 @@
+<div class="container">
+    <div class="row" #chooseTemplate>
+        <div class="col-md-6 m-1 mt-3">
+            <button type="button" class="btn btn-outline-dark" (click)="selectTemplate('displayAllFines')">Display All
+                Fines For All Borrowers</button>
+        </div>
+        <div class="col-md-5 m-1 mt-3">
+            <button type="button" class="btn btn-outline-dark" (click)="selectTemplate('payFinesforBorrower')">Display and Pay
+                Fine for Borrower</button>
+        </div>
+    </div>
+    <div class="row" #Alerts>
+        <div class="container mt-4">
+            <!-- Success Alert -->
+            <div *ngIf="showSuccessAlert" class="alert alert-success" role="alert">
+                Paid pending fines for the borrower successfully!
+            </div>
+
+            <!-- Author Doesn't exist Alert -->
+            <div *ngIf="showDangerAlert" class="alert alert-danger" role="alert">
+                The borrower with the Card ID doesn't exist!
+            </div>
+            <!--Failure Alert-->
+            <div *ngIf="showFailureAlert" class="alert alert-danger" role="alert">
+                Please enter the card ID!
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row" *ngIf="displayAllFines">
+        <table class="table table-hover" *ngIf="displaySearchFines.length > 0">
+            <thead class="thead-dark">
+                <tr>
+                    <th>S.no</th>
+                    <th>Card ID</th>
+                    <th>Borrower Name</th>
+                    <th>Fine Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let res of displaySearchFines;let i = index">
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ res.cardId }}</td>
+                    <td>{{ res.borrowerName }}</td>
+                    <td>{{ res.pendingFineAmt}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="row" *ngIf="payFinesforBorrower">
+        <div class="row" #SearchBorrower>
+            <div class="col-md-4 m-1 ms-2 mt-3">
+                <input type="text" [(ngModel)]="searchQuery" class="form-control" placeholder="Enter your Card Id here">
+            </div>
+            <div class="col-md-4 m-1 mt-3">
+                <button type="button" class="btn btn-outline-dark" (click)="searchFinesForBorrower()">
+                    Display All Fines
+                </button>
+            </div>
+        </div>
+        <div class="row" #pendingFeesPayingPart *ngIf="searchFinesforBorrowerSection">
+            <div class="col-md-4 m-1 ms-2 mt-3">
+                <h5><b>Fine Amount:</b> {{totalPendingFees | currency:'USD':'symbol':'1.2-2'}}</h5>
+            </div>
+            <div class="col-md-4 m-1 ms-2 mt-3">
+                <button type="button" [disabled]="totalPendingFees==0" class="btn btn-outline-dark"
+                    (click)="payFines()">Pay All Fines</button>
+            </div>
+        </div>
+        <div class="row mt-6" #pendingFees *ngIf="searchFinesforBorrowerSection&&pendingFinesSearchResults.length > 0">
+            <div class="row">
+                <h6 class="ms-2 mt-6">Pending Fines:</h6>
+            </div>
+            <div class="row">
+                <table class="table table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>S.no</th>
+                            <th>Loan ID</th>
+                            <th>ISBN</th>
+                            <th>Book Title</th>
+                            <th>Pending Fine Amount</th>
+                            <th>Due Date</th>
+                            <th>Date In</th>
+                            <th>Date Out</th>
+                            <th>Book Checked In Yet?</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let res of pendingFinesSearchResults;let i = index">
+                            <td>{{ i + 1 }}</td>
+                            <td>{{ res.loanId }}</td>
+                            <td>{{ res.isbn }}</td>
+                            <td>{{ res.bookTitle }}</td>
+                            <td>{{ res.fineAmt }}</td>
+                            <td>{{ res.dueDate}}</td>
+                            <td>{{ res.dateIn? res.dateIn : 'N/A'}}</td>
+                            <td>{{ res.dateOut}}</td>
+                            <td>{{ res.bookOut ? 'No' : 'Yes' }}</td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+        <div class="row" #PaidFees *ngIf="searchFinesforBorrowerSection">
+            <div class="row">
+                <h6 class="ms-2 mt-4">Previously Paid Fines:</h6>
+            </div>
+            <table class="table table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>S.no</th>
+                        <th>Loan ID</th>
+                        <th>ISBN</th>
+                        <th>Book Title</th>
+                        <th>Pending Fine Amount</th>
+                        <th>Due Date</th>                        
+                        <th>Date Out</th>
+                        <th>Date In</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let res of paidFinesSearchResults;let i = index">
+                        <td>{{ i + 1 }}</td>
+                        <td>{{ res.loanId }}</td>
+                        <td>{{ res.isbn }}</td>
+                        <td>{{ res.bookTitle }}</td>
+                        <td>{{ res.fineAmt }}</td>
+                        <td>{{ res.dueDate}}</td>                        
+                        <td>{{ res.dateOut}}</td>
+                        <td>{{ res.dateIn}}</td>
+                        
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
